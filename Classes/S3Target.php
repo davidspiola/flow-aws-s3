@@ -286,7 +286,7 @@ class S3Target implements TargetInterface
                 } else {
                     $options = [
                         'Bucket' => $this->bucketName,
-                        'CopySource' => urlencode($storageBucketName . '/' . $storage->getKeyPrefix() . $object->getSha1()),
+                        'CopySource' => urlencode($storage->getKeyPrefix() . $object->getSha1()),
                         'ContentType' => $object->getMediaType(),
                         'MetadataDirective' => 'REPLACE',
                         'Key' => $objectName
