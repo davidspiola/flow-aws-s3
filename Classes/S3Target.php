@@ -247,7 +247,7 @@ class S3Target implements TargetInterface
                 } else {
                     $options = [
                         'Bucket' => $this->bucketName,
-                        'CopySource' => urlencode($storageBucketName . '/' . $storage->getKeyPrefix() . $object->getSha1()),
+                        'CopySource' => urlencode($storage->getKeyPrefix() . $object->getSha1()),
                         'ContentType' => $object->getMediaType(),
                         'MetadataDirective' => 'REPLACE',
                         'Key' => $objectName
@@ -322,7 +322,7 @@ class S3Target implements TargetInterface
                 throw new Exception(sprintf('Could not publish resource with SHA1 hash %s of collection %s because the source and target S3 bucket is the same, with identical key prefixes. Either choose a different bucket or at least key prefix for the target.', $resource->getSha1(), $collection->getName()), 1428929563);
             }
             try {
-                $sourceObjectArn = $storage->getBucketName() . '/' . $storage->getKeyPrefix() . $resource->getSha1();
+                $sourceObjectArn = $storage->getKeyPrefix() . $resource->getSha1();
                 $objectName = $this->keyPrefix . $this->getRelativePublicationPathAndFilename($resource);
                 $options = [
                     'Bucket' => $this->bucketName,
